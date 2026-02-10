@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giveaway Landing Page</title>
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0f0f1a;
+  color:#fff;
+}
+.page{
+  display:none;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.active{display:flex;}
+.card{
+  width:92%;
+  max-width:380px;
+  background:#1b1b2d;
+  padding:22px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow:0 0 25px rgba(0,0,0,.6);
+}
+h2{margin:10px 0;}
+p{font-size:14px;color:#ccc;}
+button{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  font-size:16px;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.primary{background:#00e0ff;color:#000;}
+.secondary{background:#444;color:#fff;}
+.disabled{background:#555;cursor:not-allowed;}
+.whatsapp{background:#25D366;color:#000;}
+.messenger{background:#a833ff;color:#fff;}
+.counter{margin:10px 0;font-weight:bold;}
+.small{font-size:12px;color:#aaa;margin-top:10px;}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: WELCOME -->
+<div id="page1" class="page active">
+  <div class="card">
+    <h2>🎁 Daraz</h2>
+    <p>আজকের গিভঅ্যাওয়েতে অংশ নিন<br>সর্বোচ্চ পুরস্কার: <b>১০,০০০ টাকা</b></p>
+    <button class="primary" onclick="go(2)">Continue</button>
+    <div class="small">* অংশগ্রহণ মানেই জেতা নিশ্চিত নয়</div>
+  </div>
+</div>
+
+<!-- PAGE 2: QUESTIONS -->
+<div id="page2" class="page">
+  <div class="card">
+    <h2>কিছু প্রশ্ন</h2>
+    <p>১) আপনার বয়স ১৮+?</p>
+    <button class="secondary" onclick="go(3)">হ্যাঁ</button>
+    <p>২)‌ আপনি কি daraz ব্যবহারকারী?</p>
+    <button class="secondary" onclick="go(3)">হ্যাঁ</button>
+  </div>
+</div>
+
+<!-- PAGE 3: CHECKING -->
+<div id="page3" class="page">
+  <div class="card">
+    <h2>Checking...</h2>
+    <p>আপনার তথ্য যাচাই করা হচ্ছে ⏳</p>
+  </div>
+</div>
+
+<!-- PAGE 4: RESULT -->
+<div id="page4" class="page">
+  <div class="card">
+    <h2>🎉 আপনি যোগ্য!</h2>
+    <p>আপনি আজকের ড্র-তে অংশ নেওয়ার সুযোগ পেয়েছেন</p>
+    <p><b>Prize pool:</b> ১০,০০০ টাকা</p>
+    <button class="primary" onclick="go(5)">Next</button>
+  </div>
+</div>
+
+<!-- PAGE 5: INVITE -->
+<div id="page5" class="page">
+  <div class="card">
+    <h2>বন্ধুদের ইনভাইট করুন</h2>
+    <p>পরবর্তী ধাপে যেতে হলে <b>২০ বার Share বাটনে ক্লিক করুন</b></p>
+    <div class="counter">Share count: <span id="count">0</span>/20</div>
+
+    <button class="whatsapp" onclick="share()">WhatsApp Share</button>
+    <button class="messenger" onclick="share()">Messenger Share</button>
+
+    <button id="finalBtn" class="primary disabled" disabled>Continue</button>
+    <div class="small">
+      * শেয়ার ক্লিক গণনা করা হয়, বন্ধুর যোগদান যাচাই করা হয় না
+    </div>
+  </div>
+</div>
+
+<script>
+function go(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+
+  if(n===3){
+    setTimeout(()=>go(4),2000);
+  }
+}
+
+let count = 0;
+function share(){
+  count++;
+  document.getElementById("count").innerText = count;
+
+  // WhatsApp share link
+  window.open("https://wa.me/?text=আমি একটি গিভঅ্যাওয়েতে অংশ নিচ্ছি!","_blank");
+
+  if(count >= 20){
+    let btn = document.getElementById("finalBtn");
+    btn.disabled = false;
+    btn.classList.remove("disabled");
+    btn.style.background="#00e0ff";
+    btn.style.color="#000";
+    btn.style.cursor="pointer";
+
+    // Monetag direct link এখানে বসাতে হবে
+    btn.onclick = function(){
+      window.location.href = "https://otieu.com/4/10258573";
+    }
+  }
+}
+</script>
+
+</body>
+</html>
