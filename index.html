@@ -70,6 +70,7 @@
   .secondary { background: rgba(255,255,255,0.15); color: #fff; }
   .whatsapp { background: #25D366; color: #fff; }
   .messenger { background: #0084FF; color: #fff; }
+  .telegram { background: #0088cc; color: #fff; } /* টেলিগ্রাম কালার */
   .disabled { background: #444; color: #888; cursor: not-allowed; }
   
   .counter-box {
@@ -139,7 +140,8 @@
     <div class="counter-box">শেয়ার: <span id="count">0</span> / 20</div>
     
     <button class="whatsapp" onclick="doShare('wa')">WhatsApp এ শেয়ার</button>
-    <button class="messenger" onclick="doShare('fb')">Facebook/Messenger এ শেয়ার</button>
+    <button class="messenger" onclick="doShare('fb')">Facebook এ শেয়ার</button>
+    <button class="telegram" onclick="doShare('tg')">Telegram এ শেয়ার</button>
     
     <button id="finalBtn" class="disabled" disabled>পরবর্তী ধাপ (টাকা নিন)</button>
   </div>
@@ -163,12 +165,13 @@
     
     if(platform === 'wa') {
       window.open("https://wa.me/?text=" + encodeURIComponent(shortLink), "_blank");
-    } else {
-      // ফেসবুক শেয়ার লিঙ্ক যা মেসেঞ্জারেও কাজ করবে
+    } else if(platform === 'fb') {
       window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shortLink), "_blank");
+    } else if(platform === 'tg') {
+      // টেলিগ্রাম শেয়ার লিঙ্ক
+      window.open("https://t.me/share/url?url=" + encodeURIComponent(shortLink), "_blank");
     }
 
-    // ৬ সেকেন্ড কাউন্টডাউন
     setTimeout(function() {
       count++;
       if(count <= 20) document.getElementById("count").innerText = count;
