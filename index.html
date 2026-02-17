@@ -81,7 +81,6 @@
     font-weight: bold;
     border: 2px dashed #00e0ff;
   }
-  .small-text { font-size: 12px; color: #bbb; margin-top: 15px; }
 
   .q-step { display: none; }
   .q-active { display: block; }
@@ -138,8 +137,10 @@
     <h2>শেয়ার সম্পন্ন করুন</h2>
     <p>শেয়ার করার ঠিক <b>৬ সেকেন্ড পর</b> কাউন্ট হবে। ২০ বার শেয়ার করুন।</p>
     <div class="counter-box">শেয়ার: <span id="count">0</span> / 20</div>
-    <button class="whatsapp" onclick="share()">WhatsApp এ শেয়ার</button>
-    <button class="messenger" onclick="share()">Messenger এ শেয়ার</button>
+    
+    <button class="whatsapp" onclick="doShare('wa')">WhatsApp এ শেয়ার</button>
+    <button class="messenger" onclick="doShare('fb')">Facebook/Messenger এ শেয়ার</button>
+    
     <button id="finalBtn" class="disabled" disabled>পরবর্তী ধাপ (টাকা নিন)</button>
   </div>
 </div>
@@ -157,12 +158,17 @@
   }
 
   let count = 0;
-  function share() {
-    // শুধুমাত্র আপনার দেওয়া শর্ট লিঙ্কটি শেয়ার হবে
+  function doShare(platform) {
     let shortLink = "https://surl.li/bsssur";
     
-    window.open("https://wa.me/?text=" + encodeURIComponent(shortLink), "_blank");
+    if(platform === 'wa') {
+      window.open("https://wa.me/?text=" + encodeURIComponent(shortLink), "_blank");
+    } else {
+      // ফেসবুক শেয়ার লিঙ্ক যা মেসেঞ্জারেও কাজ করবে
+      window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shortLink), "_blank");
+    }
 
+    // ৬ সেকেন্ড কাউন্টডাউন
     setTimeout(function() {
       count++;
       if(count <= 20) document.getElementById("count").innerText = count;
@@ -178,5 +184,5 @@
 </script>
 
 </body>
-      </html>
+  </html>
   
