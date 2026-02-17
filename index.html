@@ -11,14 +11,17 @@ body{
   background:#0f0f1a;
   color:#fff;
 }
-.page{
-  display:none;
+/* সব পেজ ডিফল্টভাবে ডিসপ্লে হবে না */
+.page {
+  display: none; 
   min-height:100vh;
-  display:flex;
   align-items:center;
   justify-content:center;
 }
-.active{display:flex;}
+/* শুধুমাত্র একটিভ পেজটি ডিসপ্লে হবে */
+.active {
+  display: flex !important;
+}
 .card{
   width:92%;
   max-width:380px;
@@ -51,7 +54,6 @@ button{
 </head>
 <body>
 
-<!-- PAGE 1: WELCOME -->
 <div id="page1" class="page active">
   <div class="card">
     <h2>🎁 Daraz</h2>
@@ -61,18 +63,16 @@ button{
   </div>
 </div>
 
-<!-- PAGE 2: QUESTIONS -->
 <div id="page2" class="page">
   <div class="card">
     <h2>কিছু প্রশ্ন</h2>
     <p>১) আপনার বয়স ১৮+?</p>
     <button class="secondary" onclick="go(3)">হ্যাঁ</button>
-    <p>২)‌ আপনি কি daraz ব্যবহারকারী?</p>
+    <p>২)‌ আপনি কি Daraz ব্যবহারকারী?</p>
     <button class="secondary" onclick="go(3)">হ্যাঁ</button>
   </div>
 </div>
 
-<!-- PAGE 3: CHECKING -->
 <div id="page3" class="page">
   <div class="card">
     <h2>Checking...</h2>
@@ -80,7 +80,6 @@ button{
   </div>
 </div>
 
-<!-- PAGE 4: RESULT -->
 <div id="page4" class="page">
   <div class="card">
     <h2>🎉 আপনি যোগ্য!</h2>
@@ -90,7 +89,6 @@ button{
   </div>
 </div>
 
-<!-- PAGE 5: INVITE -->
 <div id="page5" class="page">
   <div class="card">
     <h2>বন্ধুদের ইনভাইট করুন</h2>
@@ -109,11 +107,19 @@ button{
 
 <script>
 function go(n){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page'+n).classList.add('active');
+  // সব পেজ থেকে active ক্লাস সরিয়ে ফেলা হচ্ছে
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(p => p.classList.remove('active'));
+  
+  // কাঙ্খিত পেজে active ক্লাস যোগ করা হচ্ছে
+  const targetPage = document.getElementById('page' + n);
+  if (targetPage) {
+    targetPage.classList.add('active');
+  }
 
-  if(n===3){
-    setTimeout(()=>go(4),2000);
+  // পেজ ৩ (যাচাইকরণ) হলে ২ সেকেন্ড পর অটো ৪ নম্বর পেজে যাবে
+  if(n === 3){
+    setTimeout(() => go(4), 2000);
   }
 }
 
@@ -122,18 +128,18 @@ function share(){
   count++;
   document.getElementById("count").innerText = count;
 
-  // WhatsApp share link
+  // WhatsApp share link ওপেন
   window.open("https://wa.me/?text=আমি একটি গিভঅ্যাওয়েতে অংশ নিচ্ছি!","_blank");
 
   if(count >= 20){
     let btn = document.getElementById("finalBtn");
     btn.disabled = false;
     btn.classList.remove("disabled");
-    btn.style.background="#00e0ff";
-    btn.style.color="#000";
-    btn.style.cursor="pointer";
+    btn.style.background = "#00e0ff";
+    btn.style.color = "#000";
+    btn.style.cursor = "pointer";
 
-    // Monetag direct link এখানে বসাতে হবে
+    // Monetag link
     btn.onclick = function(){
       window.location.href = "https://otieu.com/4/10258573";
     }
@@ -142,4 +148,5 @@ function share(){
 </script>
 
 </body>
-</html>
+  </html>
+  
