@@ -3,150 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Giveaway Landing Page</title>
+<title>Daraz Reward 2026</title>
 <style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#0f0f1a;
-  color:#fff;
-}
-/* সব পেজ ডিফল্টভাবে ডিসপ্লে হবে না */
-.page {
-  display: none; 
-  min-height:100vh;
-  align-items:center;
-  justify-content:center;
-}
-/* শুধুমাত্র একটিভ পেজটি ডিসপ্লে হবে */
-.active {
-  display: flex !important;
-}
-.card{
-  width:92%;
-  max-width:380px;
-  background:#1b1b2d;
-  padding:22px;
-  border-radius:14px;
-  text-align:center;
-  box-shadow:0 0 25px rgba(0,0,0,.6);
-}
-h2{margin:10px 0;}
-p{font-size:14px;color:#ccc;}
-button{
-  width:100%;
-  padding:14px;
-  margin-top:12px;
-  font-size:16px;
-  border:none;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-}
-.primary{background:#00e0ff;color:#000;}
-.secondary{background:#444;color:#fff;}
-.disabled{background:#555;cursor:not-allowed;}
-.whatsapp{background:#25D366;color:#000;}
-.messenger{background:#a833ff;color:#fff;}
-.counter{margin:10px 0;font-weight:bold;}
-.small{font-size:12px;color:#aaa;margin-top:10px;}
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-image: url('https://i.postimg.cc/26gWhQWw/c1428bdd5ed9e7cab48674955fd7901a.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+
+  .page {
+    display: none; 
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .active {
+    display: flex !important;
+  }
+  .card {
+    width: 90%;
+    max-width: 400px;
+    background: rgba(27, 27, 45, 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  h2 { color: #00e0ff; margin-bottom: 15px; }
+  p { font-size: 16px; color: #eee; line-height: 1.6; }
+  
+  button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  button:active { transform: scale(0.97); }
+
+  .primary { background: #00e0ff; color: #000; }
+  .secondary { background: rgba(255,255,255,0.15); color: #fff; }
+  .whatsapp { background: #25D366; color: #fff; }
+  .messenger { background: #0084FF; color: #fff; }
+  .disabled { background: #444; color: #888; cursor: not-allowed; }
+  
+  .counter-box {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 224, 255, 0.1);
+    border-radius: 12px;
+    font-size: 22px;
+    font-weight: bold;
+    border: 2px dashed #00e0ff;
+  }
+  .small-text { font-size: 12px; color: #bbb; margin-top: 15px; }
+
+  .q-step { display: none; }
+  .q-active { display: block; }
 </style>
 </head>
 <body>
 
 <div id="page1" class="page active">
   <div class="card">
-    <h2>🎁 Daraz</h2>
-    <p>আজকের গিভঅ্যাওয়েতে অংশ নিন<br>সর্বোচ্চ পুরস্কার: <b>১০,০০০ টাকা</b></p>
-    <button class="primary" onclick="go(2)">Continue</button>
-    <div class="small">* অংশগ্রহণ মানেই জেতা নিশ্চিত নয়</div>
+    <h2>🎁 Daraz Reward</h2>
+    <p>আপনি আমাদের বিশেষ লাকি ড্র-তে নির্বাচিত হয়েছেন!<br><b>পুরস্কার মূল্য: ১০,০০০ টাকা</b></p>
+    <button class="primary" onclick="go(2)">অংশ নিন</button>
   </div>
 </div>
 
 <div id="page2" class="page">
   <div class="card">
-    <h2>কিছু প্রশ্ন</h2>
-    <p>১) আপনার বয়স ১৮+?</p>
-    <button class="secondary" onclick="go(3)">হ্যাঁ</button>
-    <p>২)‌ আপনি কি Daraz ব্যবহারকারী?</p>
-    <button class="secondary" onclick="go(3)">হ্যাঁ</button>
+    <h2>সহজ ৩টি প্রশ্ন</h2>
+    <div id="qs1" class="q-step q-active">
+      <p>১) আপনার বয়স কি ১৮ বছরের বেশি?</p>
+      <button class="secondary" onclick="nextQ(2)">হ্যাঁ</button>
+      <button class="secondary" onclick="nextQ(2)">না</button>
+    </div>
+    <div id="qs2" class="q-step">
+      <p>২) আপনি কি আগে কখনও Daraz ব্যবহার করেছেন?</p>
+      <button class="secondary" onclick="nextQ(3)">হ্যাঁ, করেছি</button>
+      <button class="secondary" onclick="nextQ(3)">না, করিনি</button>
+    </div>
+    <div id="qs3" class="q-step">
+      <p>৩) আপনি কি আপনার পুরস্কারটি গ্রহণ করতে চান?</p>
+      <button class="secondary" onclick="go(3)">হ্যাঁ, অবশ্যই</button>
+    </div>
   </div>
 </div>
 
 <div id="page3" class="page">
   <div class="card">
-    <h2>Checking...</h2>
-    <p>আপনার তথ্য যাচাই করা হচ্ছে ⏳</p>
+    <h2>যাচাই করা হচ্ছে...</h2>
+    <p>অপেক্ষা করুন...</p>
+    <div style="font-size: 50px;">⏳</div>
   </div>
 </div>
 
 <div id="page4" class="page">
   <div class="card">
-    <h2>🎉 আপনি যোগ্য!</h2>
-    <p>আপনি আজকের ড্র-তে অংশ নেওয়ার সুযোগ পেয়েছেন</p>
-    <p><b>Prize pool:</b> ১০,০০০ টাকা</p>
-    <button class="primary" onclick="go(5)">Next</button>
+    <h2>🎉 অভিনন্দন!</h2>
+    <p>আপনি যোগ্য হয়েছেন। শেষ ধাপটি সম্পন্ন করে টাকা উইথড্র করুন।</p>
+    <button class="primary" onclick="go(5)">টাকা গ্রহণ করুন</button>
   </div>
 </div>
 
 <div id="page5" class="page">
   <div class="card">
-    <h2>বন্ধুদের ইনভাইট করুন</h2>
-    <p>পরবর্তী ধাপে যেতে হলে <b>২০ বার Share বাটনে ক্লিক করুন</b></p>
-    <div class="counter">Share count: <span id="count">0</span>/20</div>
-
-    <button class="whatsapp" onclick="share()">WhatsApp Share</button>
-    <button class="messenger" onclick="share()">Messenger Share</button>
-
-    <button id="finalBtn" class="primary disabled" disabled>Continue</button>
-    <div class="small">
-      * শেয়ার ক্লিক গণনা করা হয়, দ্রুত শেয়ার করুন
-    </div>
+    <h2>শেয়ার সম্পন্ন করুন</h2>
+    <p>শেয়ার করার ঠিক <b>৬ সেকেন্ড পর</b> কাউন্ট হবে। ২০ বার শেয়ার করুন।</p>
+    <div class="counter-box">শেয়ার: <span id="count">0</span> / 20</div>
+    <button class="whatsapp" onclick="share()">WhatsApp এ শেয়ার</button>
+    <button class="messenger" onclick="share()">Messenger এ শেয়ার</button>
+    <button id="finalBtn" class="disabled" disabled>পরবর্তী ধাপ (টাকা নিন)</button>
   </div>
 </div>
 
 <script>
-function go(n){
-  // সব পেজ থেকে active ক্লাস সরিয়ে ফেলা হচ্ছে
-  const pages = document.querySelectorAll('.page');
-  pages.forEach(p => p.classList.remove('active'));
-  
-  // কাঙ্খিত পেজে active ক্লাস যোগ করা হচ্ছে
-  const targetPage = document.getElementById('page' + n);
-  if (targetPage) {
-    targetPage.classList.add('active');
+  function go(n) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page' + n).classList.add('active');
+    if(n === 3) setTimeout(() => go(4), 3000);
   }
 
-  // পেজ ৩ (যাচাইকরণ) হলে ২ সেকেন্ড পর অটো ৪ নম্বর পেজে যাবে
-  if(n === 3){
-    setTimeout(() => go(4), 2000);
+  function nextQ(step) {
+    document.querySelectorAll('.q-step').forEach(s => s.classList.remove('q-active'));
+    document.getElementById('qs' + step).classList.add('q-active');
   }
-}
 
-let count = 0;
-function share(){
-  count++;
-  document.getElementById("count").innerText = count;
+  let count = 0;
+  function share() {
+    // শুধুমাত্র আপনার দেওয়া শর্ট লিঙ্কটি শেয়ার হবে
+    let shortLink = "https://surl.li/bsssur";
+    
+    window.open("https://wa.me/?text=" + encodeURIComponent(shortLink), "_blank");
 
-  // WhatsApp share link ওপেন
-  window.open("https://wa.me/?text=আমি একটি গিভঅ্যাওয়েতে অংশ নিচ্ছি!","_blank");
-
-  if(count >= 20){
-    let btn = document.getElementById("finalBtn");
-    btn.disabled = false;
-    btn.classList.remove("disabled");
-    btn.style.background = "#00e0ff";
-    btn.style.color = "#000";
-    btn.style.cursor = "pointer";
-
-    // Monetag link
-    btn.onclick = function(){
-      window.location.href = "https://otieu.com/4/10258573";
-    }
+    setTimeout(function() {
+      count++;
+      if(count <= 20) document.getElementById("count").innerText = count;
+      if(count >= 20) {
+        let btn = document.getElementById("finalBtn");
+        btn.disabled = false;
+        btn.classList.remove("disabled");
+        btn.classList.add("primary");
+        btn.onclick = function() { window.location.href = "https://otieu.com/4/10258573"; };
+      }
+    }, 6000);
   }
-}
 </script>
 
 </body>
-  </html>
+      </html>
   
